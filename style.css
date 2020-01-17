@@ -1,0 +1,9 @@
+.btn{
+    background-color: mediumslateblue;
+}
+.btn:hover{
+    background-color: slateblue;
+}
+.jumbotron{
+    background-color: gainsboro;
+}
