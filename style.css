@@ -7,3 +7,9 @@
 .jumbotron{
     background-color: gainsboro;
 }
+nav{
+    margin-bottom: 20px;
+}
+#backmain, #clearsco{
+    border: 0cm;
+}
