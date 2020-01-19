@@ -1,15 +1,29 @@
 .btn{
     background-color: mediumslateblue;
+    color: white;
 }
 .btn:hover{
     background-color: slateblue;
+    color: white;
 }
 .jumbotron{
     background-color: gainsboro;
+    width: 600px;
+    margin: auto;
 }
 nav{
     margin-bottom: 20px;
 }
 #backmain, #clearsco{
     border: 0cm;
+}
+.btn-grid {
+    display: grid;
+    grid-template-columns: repeat(1);
+    gap: 5px;
+    margin: 20px 0;
+    width: fit-content;
+}
+.hide {
+    display: none;
 }

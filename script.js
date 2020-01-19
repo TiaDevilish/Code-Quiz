@@ -1,34 +1,59 @@
-$(document).ready(function(){
-    //questions asked
-    var questions = [
-        {
-            question:"1. What are variables used for in JavaScript Programs?",
-            options:["A. Storing numbers, dates, or other values","B. Varying Randomly","C. Causing high-school algebra flashbacks","D. None of the above"],
-            answer:"A. Storing numbers, dates, or other values"
-        },
-        {
-            question:"2. Inside which HTML element do we put the JavaScript?",
-            options:["A. <js>","B. <scripting>", "C. <script>", "D. <javascript>"],
-            answer:"C. <script>"
-        },
-        {
-            question:"3. Which of the following is not considered as an error in JavaScript?",
-            options:["A. Syntax error", "B. Missing of semicolons", "C. Division by zero", "D. All of the mentioned"],
-            answer:"C. Division by zero"
-        },
-        {
-            question:"4. Which built-in method removes the last element from an array and returns that element?",
-            options:["A. last()", "B. get()","C. pop()","D. None of the above"],
-            answer:"C. pop()"
-        },
-        {
-            question:"5. Arrays in JavaScript can be used to store:",
-            choices: ["A. Numbers and strings", "B. Other arrays", "C. Booleans", "D. All of the above"],
-            answer: "D. All of the above"
+var startBtn = document.getElementById("startBtn");
+var quizInfo = document.getElementById("inforquiz");
+var questionContainer = document.getElementById("question-container");
+let mixedQuestions, currentQuestionIndex
+var questionElement = document.getElementById("questions");
+var answerBtnsElement = document.getElementById("answers");
+
+startBtn.addEventListener("click", startGame)
+
+
+function startGame() {
+startBtn.classList.add("hide")
+mixedQuestions = quiestions.sort(() => Math.random() - .5)
+currentQuestionIndex = 0
+quizInfo.classList.add("hide")
+questionContainer.classList.remove("hide")
+setNextQuestion()
+}
+
+function setNextQuestion(){
+    resetToDefault()
+    showQuestion(mixedQuestions[currentQuestionIndex])
+}
+
+function showQuestion(question){
+    questionElement.innerHTML = question.quiestion
+    question.answers.forEach(answer => {
+        var button = document.createElement("button")
+        button.innerHTML = answer.text
+        button.classList.add("btn")
+        if (answer.correct){
+            button.dataset.correct = answer.correct
         }
-    ];
+        button.addEventListener("click", selectAnswer)
+        answerBtnsElement.appendChild(button)
+    })
+}
 
+function resetToDefault(){
+    while (answerBtnsElement.firstChild){
+        answerBtnsElement.removeChild(answerBtnsElement.firstChild)
+    }
+}
 
+function selectAnswer(e){
 
+}
 
-})
+var quiestions = [
+    {
+        quiestion:"1. What are variables used for in JavaScript Programs?",
+        answers:[
+            {text: "A. Storing numbers, dates, or other values", correct: true },
+            {text:"B. Varying Randomly", correct: false },
+            {text:"C. Causing high-school algebra flashbacks", correct: false },
+            {text:"D. None of the above", correct: false}
+        ]
+    }
+]
