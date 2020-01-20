@@ -7,7 +7,10 @@ var answerBtnsElement = document.getElementById("answers");
 var alert = document.getElementById("alert");
 
 startBtn.addEventListener("click", startGame)
-
+answerBtnsElement.addEventListener("click", () => {
+    currentQuestionIndex++
+    setNextQuestion()
+})
 
 function startGame() {
 startBtn.classList.add("hide")
@@ -52,7 +55,16 @@ function selectAnswer(e){
     })
 }
 //ALERT IF CORRECT
-
+// function setStatusClass(element, correct){
+//     clearStatusClass(element)
+//     if(correct){
+//         alert.innerText = "Correct!"
+//         console.log("Correct")
+//     }else {
+//         alert.innerText = "Wrong!"
+//         console.log("Wrong")
+//     }
+// }
 
 function clearStatusClass(element) {
     element.classList.remove("correct")
