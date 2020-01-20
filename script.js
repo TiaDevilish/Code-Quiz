@@ -58,12 +58,12 @@ function clearStatusClass(element) {
     element.classList.remove("correct")
     element.classList.remove("wrong")
 }
-//mi
+
 var questions = [
     {
         question:"What are variables used for in JavaScript Programs?",
         answers:[
-            {text: "A. Storing numbers, dates, or other values", correct: true },
+            {text:"A. Storing numbers, dates, or other values", correct: true },
             {text:"B. Varying Randomly", correct: false},
             {text:"C. Causing high-school algebra flashbacks", correct: false },
             {text:"D. None of the above", correct: false}
@@ -79,18 +79,18 @@ var questions = [
         ]
     },
     {
-        question:"Inside which HTML element do we put the JavaScript?",
+        question:"A very useful tool used during development and debugging for printing content to the debugger is:---",
         answers:[
-            {text: "A. <js>", correct: false },
-            {text:"B. <scripting>", correct: false},
-            {text:"C. <script>", correct: true },
-            {text:"D. <javascript>", correct: false}
+            {text:"A. JavaScript", correct: false },
+            {text:"B. terminal/bash", correct: false},
+            {text:"C. alerts", correct: false},
+            {text:"D. console.log", correct: true}
         ]
     },
     {
         question:"Which of the following is not considered as an error in JavaScript?",
         answers:[
-            {text: "A. Syntax error", correct: false },
+            {text:"A. Syntax error", correct: false },
             {text:"B. Missing of semicolons", correct: false},
             {text:"C. Division by zero", correct: true },
             {text:"D. All of the mentioned", correct: false}
