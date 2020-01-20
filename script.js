@@ -4,6 +4,7 @@ var questionContainer = document.getElementById("question-container");
 let mixedQuestions, currentQuestionIndex
 var questionElement = document.getElementById("questions");
 var answerBtnsElement = document.getElementById("answers");
+var alert = document.getElementById("alert");
 
 startBtn.addEventListener("click", startGame)
 
@@ -43,7 +44,27 @@ function resetToDefault(){
 }
 
 function selectAnswer(e){
+    var selectedBtn = e.target
+    var correct = selectedBtn.dataset.correct
+    setStatusClass(document.body, correct)
+    Array.from(answerBtnsElement.children).forEach(button => {
+        setStatusClass(button, button.dataset.correct)
+    })
+}
+//ALERT IF CORRECT
+function setStatusClass(element, correct) {
+    clearStatusClass(element)
+    if(correct){
+        
+        alert.innerText= "Good"
+        console.log("Good")
+    }
+   
+}
 
+function clearStatusClass(element) {
+    element.classList.remove("correct")
+    element.classList.remove("wrong")
 }
 
 var quiestions = [
@@ -51,7 +72,7 @@ var quiestions = [
         quiestion:"1. What are variables used for in JavaScript Programs?",
         answers:[
             {text: "A. Storing numbers, dates, or other values", correct: true },
-            {text:"B. Varying Randomly", correct: false },
+            {text:"B. Varying Randomly", correct: false},
             {text:"C. Causing high-school algebra flashbacks", correct: false },
             {text:"D. None of the above", correct: false}
         ]
