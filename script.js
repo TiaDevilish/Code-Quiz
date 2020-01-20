@@ -32,7 +32,7 @@ function showQuestion(question){
         if (answer.correct){
             button.dataset.correct = answer.correct
         }
-        button.addEventListener("click", selectAnswer)
+        button.addEventListener("click", setNextQuestion)
         answerBtnsElement.appendChild(button)
     })
 }
@@ -52,15 +52,7 @@ function selectAnswer(e){
     })
 }
 //ALERT IF CORRECT
-function setStatusClass(element, correct) {
-    clearStatusClass(element)
-    if(correct){
-        
-        alert.innerText= "Good"
-        console.log("Good")
-    }
-   
-}
+
 
 function clearStatusClass(element) {
     element.classList.remove("correct")
@@ -74,6 +66,42 @@ var quiestions = [
             {text: "A. Storing numbers, dates, or other values", correct: true },
             {text:"B. Varying Randomly", correct: false},
             {text:"C. Causing high-school algebra flashbacks", correct: false },
+            {text:"D. None of the above", correct: false}
+        ]
+    },
+    {
+        quiestion:"2. Arrays in JavaScript can be used to store:",
+        answers:[
+            {text:"A. Numbers and strings", correct: false},
+            {text:"B. Other arrays", correct: false},
+            {text:"C. Booleans", correct: false },
+            {text:"D. All of the above", correct: true}
+        ]
+    },
+    {
+        quiestion:"3. Inside which HTML element do we put the JavaScript?",
+        answers:[
+            {text: "A. <js>", correct: false },
+            {text:"B. <scripting>", correct: false},
+            {text:"C. <script>", correct: true },
+            {text:"D. <javascript>", correct: false}
+        ]
+    },
+    {
+        quiestion:"4. Which of the following is not considered as an error in JavaScript?",
+        answers:[
+            {text: "A. Syntax error", correct: false },
+            {text:"B. Missing of semicolons", correct: false},
+            {text:"C. Division by zero", correct: true },
+            {text:"D. All of the mentioned", correct: false}
+        ]
+    },
+    {
+        quiestion:"5. Which built-in method removes the last element from an array and returns that element?",
+        answers:[
+            {text:"A. last()", correct: false },
+            {text:"B. get()", correct: false},
+            {text:"C. pop()", correct: true},
             {text:"D. None of the above", correct: false}
         ]
     }
