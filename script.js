@@ -11,7 +11,7 @@ startBtn.addEventListener("click", startGame)
 
 function startGame() {
 startBtn.classList.add("hide")
-mixedQuestions = quiestions.sort(() => Math.random() - .5)
+mixedQuestions = questions.sort(() => Math.random() - .5)
 currentQuestionIndex = 0
 quizInfo.classList.add("hide")
 questionContainer.classList.remove("hide")
@@ -24,7 +24,7 @@ function setNextQuestion(){
 }
 
 function showQuestion(question){
-    questionElement.innerHTML = question.quiestion
+    questionElement.innerHTML = question.question
     question.answers.forEach(answer => {
         var button = document.createElement("button")
         button.innerHTML = answer.text
@@ -58,10 +58,10 @@ function clearStatusClass(element) {
     element.classList.remove("correct")
     element.classList.remove("wrong")
 }
-
-var quiestions = [
+//mi
+var questions = [
     {
-        quiestion:"1. What are variables used for in JavaScript Programs?",
+        question:"What are variables used for in JavaScript Programs?",
         answers:[
             {text: "A. Storing numbers, dates, or other values", correct: true },
             {text:"B. Varying Randomly", correct: false},
@@ -70,7 +70,7 @@ var quiestions = [
         ]
     },
     {
-        quiestion:"2. Arrays in JavaScript can be used to store:",
+        question:"Arrays in JavaScript can be used to store:",
         answers:[
             {text:"A. Numbers and strings", correct: false},
             {text:"B. Other arrays", correct: false},
@@ -79,7 +79,7 @@ var quiestions = [
         ]
     },
     {
-        quiestion:"3. Inside which HTML element do we put the JavaScript?",
+        question:"Inside which HTML element do we put the JavaScript?",
         answers:[
             {text: "A. <js>", correct: false },
             {text:"B. <scripting>", correct: false},
@@ -88,7 +88,7 @@ var quiestions = [
         ]
     },
     {
-        quiestion:"4. Which of the following is not considered as an error in JavaScript?",
+        question:"Which of the following is not considered as an error in JavaScript?",
         answers:[
             {text: "A. Syntax error", correct: false },
             {text:"B. Missing of semicolons", correct: false},
@@ -97,7 +97,7 @@ var quiestions = [
         ]
     },
     {
-        quiestion:"5. Which built-in method removes the last element from an array and returns that element?",
+        question:"Which built-in method removes the last element from an array and returns that element?",
         answers:[
             {text:"A. last()", correct: false },
             {text:"B. get()", correct: false},
