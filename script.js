@@ -13,7 +13,7 @@ answerBtnsElement.addEventListener("click", (event) => {
     currentQuestionIndex++
     selectAnswer(event)
     //if data- correct att is true display this alert, else display the other alert
-    //set timer to display the message for 3 seconds
+    //set timer to display the message for 1 second
     setNextQuestion()
 })
 //this will start the game and give a random question, hide the start btn and add the question list display
@@ -53,7 +53,9 @@ function resetToDefault(){
 //this is to show which element was clicked on
 function selectAnswer(e){
     var selectedBtn = e.target
+    console.log(e)
     var correct = selectedBtn.dataset.correct
+    setStatusClass(selectedBtn.e, correct)
     Array.from(answerBtnsElement.children).forEach(button => {
         setStatusClass(button, button.dataset.correct)
     })
@@ -62,74 +64,65 @@ function selectAnswer(e){
 
 //ALERT IF CORRECT
 function setStatusClass(element, correct){
+    
     console.log(element)
     console.log(correct)
-    
-    if(correct === "true"){
-        alert.innerText = "Correct!"
+   
+    if(correct){
+        alert.innerText = "correct!"
         setTimeout(function(){ alert.innerText = ""}, 1000)
-       
+    }else {
+        alert.innerText = "wrong!"
+        setTimeout(function(){ alert.innerText = ""}, 1000)
     }
-    
-    // if(correct === false){
-    //     alert.innerText = "Wrong!"
-    //     setTimeout(function(){ alert.innerText = ""}, 1000)
-    // }
-
-
-    // else {
-    //     alert.innerText = "Wrong!"
-    //     setTimeout(function(){ alert.innerText = ""}, 2000)
-        
-    // }
 }
 
 
 
 var questions = [
-    {
+    {//always wrong
         question:"What are variables used for in JavaScript Programs?",
         answers:[
             {text:"A. Storing numbers, dates, or other values", correct: true},
             {text:"B. Varying Randomly", correct: false},
             {text:"C. Causing high-school algebra flashbacks", correct: false},
-            {text:"D. None of the above", correct: false}
+            {text:"D. None of the above", correct: false},
         ]
     },
-    {
+    {//always correct
         question:"Arrays in JavaScript can be used to store:",
         answers:[
             {text:"A. Numbers and strings", correct: false},
             {text:"B. Other arrays", correct: false},
             {text:"C. Booleans", correct: false },
-            {text:"D. All of the above", correct: true}
+            {text:"D. All of the above", correct: true},
         ]
     },
-    {
+    {//always correct
         question:"A very useful tool used during development and debugging for printing content to the debugger is:---",
         answers:[
-            {text:"A. JavaScript", correct: false },
+            {text:"A. JavaScript", correct: false},
             {text:"B. terminal/bash", correct: false},
             {text:"C. alerts", correct: false},
-            {text:"D. console.log", correct: true}
+            {text:"D. console.log", correct: true},
         ]
     },
-    {
+    {//always wrong
         question:"Which of the following is not considered as an error in JavaScript?",
         answers:[
-            {text:"A. Syntax error", correct: false },
+            {text:"A. Syntax error", correct: false},
             {text:"B. Missing of semicolons", correct: false},
-            {text:"C. Division by zero", correct: true },
-            {text:"D. All of the mentioned", correct: false}
+            {text:"C. Division by zero", correct: true},
+            {text:"D. All of the mentioned", correct: false},
         ]
     },
-    {
+    {//always wrong
         question:"Which built-in method removes the last element from an array and returns that element?",
         answers:[
-            {text:"A. last()", correct: false },
+            {text:"A. last()", correct: false},
             {text:"B. get()", correct: false},
             {text:"C. pop()", correct: true},
-            {text:"D. None of the above", correct: false}
+            {text:"D. None of the above", correct: false},
         ]
     }
 ]
