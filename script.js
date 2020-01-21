@@ -6,12 +6,17 @@ var questionElement = document.getElementById("questions");
 var answerBtnsElement = document.getElementById("answers");
 var alert = document.getElementById("alert");
 
+
+//event listeners for startbtn and answerbtn 
 startBtn.addEventListener("click", startGame)
-answerBtnsElement.addEventListener("click", () => {
+answerBtnsElement.addEventListener("click", (event) => {
     currentQuestionIndex++
+    selectAnswer(event)
+    //if data- correct att is true display this alert, else display the other alert
+    //set timer to display the message for 3 seconds
     setNextQuestion()
 })
-
+//this will start the game and give a random question, hide the start btn and add the question list display
 function startGame() {
 startBtn.classList.add("hide")
 mixedQuestions = questions.sort(() => Math.random() - .5)
@@ -20,17 +25,17 @@ quizInfo.classList.add("hide")
 questionContainer.classList.remove("hide")
 setNextQuestion()
 }
-
+//next question is shown, old one is hidden
 function setNextQuestion(){
     resetToDefault()
     showQuestion(mixedQuestions[currentQuestionIndex])
 }
-
+//showing the questions in a button
 function showQuestion(question){
-    questionElement.innerHTML = question.question
+    questionElement.innerText = question.question
     question.answers.forEach(answer => {
         var button = document.createElement("button")
-        button.innerHTML = answer.text
+        button.innerText = answer.text
         button.classList.add("btn")
         if (answer.correct){
             button.dataset.correct = answer.correct
@@ -45,39 +50,49 @@ function resetToDefault(){
         answerBtnsElement.removeChild(answerBtnsElement.firstChild)
     }
 }
-
+//this is to show which element was clicked on
 function selectAnswer(e){
     var selectedBtn = e.target
     var correct = selectedBtn.dataset.correct
-    setStatusClass(document.body, correct)
     Array.from(answerBtnsElement.children).forEach(button => {
         setStatusClass(button, button.dataset.correct)
     })
 }
-//ALERT IF CORRECT
-// function setStatusClass(element, correct){
-//     clearStatusClass(element)
-//     if(correct){
-//         alert.innerText = "Correct!"
-//         console.log("Correct")
-//     }else {
-//         alert.innerText = "Wrong!"
-//         console.log("Wrong")
-//     }
-// }
 
-function clearStatusClass(element) {
-    element.classList.remove("correct")
-    element.classList.remove("wrong")
+
+//ALERT IF CORRECT
+function setStatusClass(element, correct){
+    console.log(element)
+    console.log(correct)
+    
+    if(correct === "true"){
+        alert.innerText = "Correct!"
+        setTimeout(function(){ alert.innerText = ""}, 1000)
+       
+    }
+    
+    // if(correct === false){
+    //     alert.innerText = "Wrong!"
+    //     setTimeout(function(){ alert.innerText = ""}, 1000)
+    // }
+
+
+    // else {
+    //     alert.innerText = "Wrong!"
+    //     setTimeout(function(){ alert.innerText = ""}, 2000)
+        
+    // }
 }
+
+
 
 var questions = [
     {
         question:"What are variables used for in JavaScript Programs?",
         answers:[
-            {text:"A. Storing numbers, dates, or other values", correct: true },
+            {text:"A. Storing numbers, dates, or other values", correct: true},
             {text:"B. Varying Randomly", correct: false},
-            {text:"C. Causing high-school algebra flashbacks", correct: false },
+            {text:"C. Causing high-school algebra flashbacks", correct: false},
             {text:"D. None of the above", correct: false}
         ]
     },
