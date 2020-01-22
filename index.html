@@ -16,17 +16,13 @@
 <body>
     <nav class="navbar navbar-light bg-light navbar-expand-lg">
         <a class="navbar-brand" href="highscores.html">View High Scores</a>
-        <span class="navbar-text ml-auto">Time: <span id="timer"></span></span>
+        <span class="navbar-text ml-auto">Time: <span id="timer">75</span></span>
     </nav>
    <div class="container">
        <div class="jumbotron">
           <div id="question-container" class="hide">
-              <div id="questions">Question</div>
-              <div id="answers" class="btn-grid">
-                  <button class="btn">Answer1</button>
-                  <button class="btn">Answer2</button>
-                  <button class="btn">Answer3</button>
-                  <button class="btn">Answer4</button>
+              <div id="title-item">Question</div>
+              <div class="btn-grid" id="question-answers"> 
               </div>
               <h1 id="alert"></h1>
           </div>
@@ -35,6 +31,16 @@
             <center><p id="inforquiz">You will have 75 seconds to prove your knowledge</p></center>
             <center><button id="startBtn" class="start-btn btn">Start The Quiz</button></center>
           </div>
+          <div class="hide" id="addscore">
+            <h5 class="d-block"><span id="score"></span></h5>
+                <input type="text" class="form-control" placeholder="Enter your initials:"
+                id="inputScore" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="input-group-text btn btn-primary" id="btnScore">Submit</button>
+
+                </div>
+        </div>
+
        </div>
    </div>
    <script src="script.js"></script>

@@ -1,128 +1,124 @@
-var startBtn = document.getElementById("startBtn");
-var quizInfo = document.getElementById("inforquiz");
 var questionContainer = document.getElementById("question-container");
-let mixedQuestions, currentQuestionIndex
-var questionElement = document.getElementById("questions");
-var answerBtnsElement = document.getElementById("answers");
+var startBtn = document.getElementById("startBtn");
+var titleitem = document.getElementById("title-item");
+var nextQuestions;
+var questionAnswers = document.getElementById("question-answers");
+var currentQuestionIndex = 0;
 var alert = document.getElementById("alert");
-
-
-//event listeners for startbtn and answerbtn 
-startBtn.addEventListener("click", startGame)
-answerBtnsElement.addEventListener("click", (event) => {
-    currentQuestionIndex++
-    selectAnswer(event)
-    //if data- correct att is true display this alert, else display the other alert
-    //set timer to display the message for 1 second
-    setNextQuestion()
-})
-//this will start the game and give a random question, hide the start btn and add the question list display
-function startGame() {
-startBtn.classList.add("hide")
-mixedQuestions = questions.sort(() => Math.random() - .5)
-currentQuestionIndex = 0
-quizInfo.classList.add("hide")
-questionContainer.classList.remove("hide")
-setNextQuestion()
-}
-//next question is shown, old one is hidden
-function setNextQuestion(){
-    resetToDefault()
-    showQuestion(mixedQuestions[currentQuestionIndex])
-}
-//showing the questions in a button
-function showQuestion(question){
-    questionElement.innerText = question.question
-    question.answers.forEach(answer => {
-        var button = document.createElement("button")
-        button.innerText = answer.text
-        button.classList.add("btn")
-        if (answer.correct){
-            button.dataset.correct = answer.correct
-        }
-        button.addEventListener("click", setNextQuestion)
-        answerBtnsElement.appendChild(button)
-    })
-}
-
-function resetToDefault(){
-    while (answerBtnsElement.firstChild){
-        answerBtnsElement.removeChild(answerBtnsElement.firstChild)
-    }
-}
-//this is to show which element was clicked on
-function selectAnswer(e){
-    var selectedBtn = e.target
-    console.log(e)
-    var correct = selectedBtn.dataset.correct
-    setStatusClass(selectedBtn.e, correct)
-    Array.from(answerBtnsElement.children).forEach(button => {
-        setStatusClass(button, button.dataset.correct)
-    })
-}
-
-
-//ALERT IF CORRECT
-function setStatusClass(element, correct){
-    
-    console.log(element)
-    console.log(correct)
-   
-    if(correct){
-        alert.innerText = "correct!"
-        setTimeout(function(){ alert.innerText = ""}, 1000)
-    }else {
-        alert.innerText = "wrong!"
-        setTimeout(function(){ alert.innerText = ""}, 1000)
-    }
-}
-
-
+var quizInfo = document.getElementById("inforquiz");
+var allScores = [];
+var storedScores = JSON.parse(localStorage.getItem("userData"))
+var myScore = document.getElementById("score")
+var scoreBtn = document.getElementById("btnScore");
+var score = 0;
+var count = 75;
+var timer = document.getElementById("timer");
+var timeInterval = 0;
 
 var questions = [
-    {//always wrong
-        question:"What are variables used for in JavaScript Programs?",
-        answers:[
-            {text:"A. Storing numbers, dates, or other values", correct: true},
-            {text:"B. Varying Randomly", correct: false},
-            {text:"C. Causing high-school algebra flashbacks", correct: false},
-            {text:"D. None of the above", correct: false},
-        ]
+    {title:"A very useful tool used during development and debugging for printing content to the debugger is:---",
+    choices:["A. JavaScript","B. terminal/bash","C. alerts","D. console.log"],
+    answer:"D. console.log"
     },
-    {//always correct
-        question:"Arrays in JavaScript can be used to store:",
-        answers:[
-            {text:"A. Numbers and strings", correct: false},
-            {text:"B. Other arrays", correct: false},
-            {text:"C. Booleans", correct: false },
-            {text:"D. All of the above", correct: true},
-        ]
+    {title:"What are variables used for in JavaScript Programs?",
+    choices:["A. Storing numbers, dates, or other values","B. Varying Randomly","C. Causing high-school algebra flashbacks","D. None of the above"],
+    answer:"A. Storing numbers, dates, or other values"
     },
-    {//always correct
-        question:"A very useful tool used during development and debugging for printing content to the debugger is:---",
-        answers:[
-            {text:"A. JavaScript", correct: false},
-            {text:"B. terminal/bash", correct: false},
-            {text:"C. alerts", correct: false},
-            {text:"D. console.log", correct: true},
-        ]
+    {title:"Arrays in JavaScript can be used to store:",
+    choices:["A. Numbers and strings","B. Other arrays","C. Booleans","D. All of the above"],
+    answer:"D. All of the above"
     },
-    {//always wrong
-        question:"Which of the following is not considered as an error in JavaScript?",
-        answers:[
-            {text:"A. Syntax error", correct: false},
-            {text:"B. Missing of semicolons", correct: false},
-            {text:"C. Division by zero", correct: true},
-            {text:"D. All of the mentioned", correct: false},
-        ]
+    {title:"A very useful tool used during development and debugging for printing content to the debugger is:---",
+    choices:["A. JavaScript","B. terminal/bash","C. alerts","D. console.log"],
+    answer:"D. console.log"
     },
-    {//always wrong
-        question:"Which built-in method removes the last element from an array and returns that element?",
-        answers:[
-            {text:"A. last()", correct: false},
-            {text:"B. get()", correct: false},
-            {text:"C. pop()", correct: true},
-            {text:"D. None of the above", correct: false},
-        ]
-    }
+    {title:"Arrays in JavaScript can be used to store:",
+    choices:["A. Numbers and strings","B. Other arrays","C. Booleans","D. All of the above"],
+    answer:"D. All of the above"
+    },
 ]
+
+startBtn.addEventListener("click", startGame);
+
+function startGame() {
+    if(storedScores !==null){
+        allScores = storedScores;
+    }
+    startBtn.classList.add("hide")
+    quizInfo.classList.add("hide")
+    questionContainer.classList.remove("hide")
+    nextQuestions= questions[currentQuestionIndex];
+    displayQuestion(nextQuestions)
+    gametime()
+}
+
+scoreBtn.addEventListener("click", function(){
+    let name = document.getElementById("inputScore").value
+    scorePage(name, count)
+});
+
+function gametime(){
+        timeInterval = setInterval(function(){
+        timer.innerText = count
+        count
+    },1000)
+}
+
+function scorePage(a, b) {
+    var userData = {
+        inits: a,
+        userScore: b
+    };
+    allScores.push(userData);
+    localStorage.setItem("userData", JSON.stringify(allScores));
+    location.href = "highscores.html";
+}
+
+function displayQuestion(question){
+    titleitem.innerText = question.title
+    question.choices.forEach(element => {
+    var button = document.createElement("button")   
+    button.classList.add("btn")
+    button.innerText = element
+    questionAnswers.appendChild(button)
+    button.addEventListener("click", displayNextQuestion)
+    });
+}
+
+function displayNextQuestion(e){
+    currentQuestionIndex++
+    if(currentQuestionIndex < questions.length){
+        correction(e.target.innerText == nextQuestions.answer)
+        questionAnswers.innerHTML = ""
+        if(currentQuestionIndex < questions.length){
+            nextQuestions = questions[currentQuestionIndex]
+            displayQuestion(nextQuestions)
+        }else{
+            currentQuestionIndex = 0
+            displayQuestion(nextQuestions)
+        }
+    }else{
+        endgame()
+    }
+}
+
+function correction(response){
+    if(response){
+        alert.innerText = "Correct"
+        console.log("correct")
+    }else{
+        alert.innerText = "Wrong"
+        count = count -15
+        timer.innerHTML = count
+        console.log("wrong")
+    }
+    setTimeout(function(){
+        alert.innerText=""
+    },1000);
+}
+
+function endgame(){
+    myScore.innerText = count
+    questionContainer.classList.add("hide")
+    
+}
