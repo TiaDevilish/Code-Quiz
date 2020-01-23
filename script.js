@@ -29,18 +29,22 @@ var questions = [
     choices:["A. Numbers and strings","B. Other arrays","C. Booleans","D. All of the above"],
     answer:"D. All of the above"
     },
-    {title:"A very useful tool used during development and debugging for printing content to the debugger is:---",
-    choices:["A. JavaScript","B. terminal/bash","C. alerts","D. console.log"],
-    answer:"D. console.log"
+    {title:"Which of the following is not considered as an error in JavaScript?",
+    choices:["A. Syntax error","B. Missing of semicolons","C. Division by zero","D. All of the mentioned"],
+    answer:"C. Division by zero"
     },
-    {title:"Arrays in JavaScript can be used to store:",
-    choices:["A. Numbers and strings","B. Other arrays","C. Booleans","D. All of the above"],
-    answer:"D. All of the above"
+    {title:"Which built-in method removes the last element from an array and returns that element?",
+    choices:["A. last()", "B. get()","C. pop()","D. None of the above"],
+    answer:"C. pop()"
     },
-]
+    {title:"How did I do on this homework?",
+    choices:["A. It sucks!", "B. Could've done better!","C. I didn't even get to this question!","D. Okay!"],
+    answer:"D. Okay!"
+    },
+];
 
 startBtn.addEventListener("click", startGame);
-
+//start the game and hide the first screen and start btn, show the question screen
 function startGame() {
     if(storedScores !==null){
         allScores = storedScores;
