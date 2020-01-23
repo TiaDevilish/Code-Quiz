@@ -65,8 +65,8 @@ scoreBtn.addEventListener("click", function(){
 
 function gametime(){
         timeInterval = setInterval(function(){
+        count--;
         timer.innerText = count
-        count
     },1000)
 }
 
