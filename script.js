@@ -1,4 +1,5 @@
 var questionContainer = document.getElementById("question-container");
+var scoreContainer = document.getElementById("addscore")
 var startBtn = document.getElementById("startBtn");
 var titleitem = document.getElementById("title-item");
 var nextQuestions;
@@ -46,6 +47,7 @@ function startGame() {
     }
     startBtn.classList.add("hide")
     quizInfo.classList.add("hide")
+    scoreContainer.classList.add("hide")
     questionContainer.classList.remove("hide")
     nextQuestions= questions[currentQuestionIndex];
     displayQuestion(nextQuestions)
@@ -120,5 +122,5 @@ function correction(response){
 function endgame(){
     myScore.innerText = count
     questionContainer.classList.add("hide")
-    
+    scoreContainer.classList.remove("hide")
 }
