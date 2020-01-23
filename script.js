@@ -114,7 +114,7 @@ function correction(response){
         console.log("correct")
     }else{
         alert.innerText = "Wrong"
-        count = count -15
+        count = count -10
         timer.innerHTML = count
         console.log("wrong")
     }
